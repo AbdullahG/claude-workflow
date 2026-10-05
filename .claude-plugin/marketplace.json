@@ -1,0 +1,15 @@
+{
+  "name": "abdullahg",
+  "owner": {
+    "name": "Abdullah Gursu",
+    "url": "https://github.com/AbdullahG"
+  },
+  "plugins": [
+    {
+      "name": "pm-workflow",
+      "source": "./",
+      "description": "Claude Code skills by Abdullah Gursu. Includes feature-plan: challenge, then plan a feature for an existing product."
+    }
+  ],
+  "description": "Abdullah Gursu's Claude Code skills for product and engineering work."
+}
