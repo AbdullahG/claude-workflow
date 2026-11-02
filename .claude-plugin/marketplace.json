@@ -6,7 +6,7 @@
   },
   "plugins": [
     {
-      "name": "pm-workflow",
+      "name": "product",
       "source": "./",
       "description": "Claude Code skills by Abdullah Gursu. feature-plan challenges, then plans a feature for an existing product; feature-build turns the plan into a tested implementation."
     }

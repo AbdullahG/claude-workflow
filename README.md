@@ -16,7 +16,7 @@ A veteran founder-PM in your terminal. Give it a feature idea for a product that
 It plans only and never writes code. It replies in whatever language you write in.
 
 ```
-/pm-workflow:feature-plan add a referral program that gives both sides a free month
+/product:feature-plan add a referral program that gives both sides a free month
 ```
 
 ### `feature-build`
@@ -35,7 +35,7 @@ The other half of `feature-plan`: a veteran staff engineer and test architect th
 Hard rules: it never loosens, skips or deletes a test to get green, never uses `sleep` to synchronize, never tests against production, always fakes paid third-party services, and never pushes or merges. It replies in whatever language you write in.
 
 ```
-/pm-workflow:feature-build docs/plans/referral-program.md
+/product:feature-build docs/plans/referral-program.md
 ```
 
 ## Install
@@ -46,10 +46,14 @@ Inside Claude Code:
 
 ```
 /plugin marketplace add AbdullahG/claude-workflow
-/plugin install pm-workflow@abdullahg
+/plugin install product@abdullahg
 ```
 
 Restart Claude Code if the skills don't appear. Update later with `/plugin marketplace update abdullahg`.
+
+Plugin skills can be called without the `product:` prefix (`/feature-plan`, `/feature-build`) unless another plugin has a skill with the same name.
+
+The plugin used to be called `pm-workflow`. If you installed it under that name, run `/plugin uninstall pm-workflow@abdullahg`, then install `product@abdullahg` as above.
 
 ### Option 2: Copy the skills manually
 
