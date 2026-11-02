@@ -1,6 +1,6 @@
 # claude-workflow
 
-Claude Code skills I use in my day-to-day product and engineering work. `feature-plan` decides what to build and writes the plan; `feature-build` turns that plan into a tested implementation.
+Claude Code skills I use in my day-to-day product and engineering work. `feature-plan` decides what to build and writes the plan; `feature-build` turns that plan into a tested implementation. `worktree-guard` is a set of hooks you can add to a repository to keep that work in git worktrees.
 
 ## Skills
 
@@ -38,7 +38,26 @@ Hard rules: it never loosens, skips or deletes a test to get green, never uses `
 /product:feature-build docs/plans/referral-program.md
 ```
 
-## Install
+## Repo hooks
+
+Hooks are installed into a single repository, not into the plugin, so each repo opts in on its own.
+
+### `worktree-guard`
+
+Keeps every change in a git worktree and the main checkout clean, so several Claude sessions and subagents can work on one repo at the same time without stepping on each other.
+
+- **File edits and shell commands** that would write into the main checkout are denied, with a message telling Claude where to work instead. Reading from the main checkout stays allowed (copying `.env` files into a worktree works).
+- **Subagents** that can write must run with `isolation: "worktree"`. Read-only ones (Explore, Plan) are exempt.
+- **New worktrees start from a fresh `main`**: the main checkout has to match `origin/main` first. If the repo has no `main`, Claude asks you which branch to use.
+
+```bash
+git clone https://github.com/AbdullahG/claude-workflow.git
+claude-workflow/repo-hooks/worktree-guard/install.sh /path/to/your/repo
+```
+
+Then commit `.claude/hooks/worktree-guard/` and `.claude/settings.json`. Settings, limits and tests: [repo-hooks/worktree-guard](repo-hooks/worktree-guard/README.md).
+
+## Install the skills
 
 ### Option 1: Claude Code plugin (recommended)
 
@@ -78,6 +97,9 @@ skills/
     SKILL.md         # implement a plan with tests
     references/
       testing-playbook.md  # test patterns the skill reads in its test phase
+repo-hooks/
+  worktree-guard/    # hooks installed per repository with install.sh
+    README.md        # settings, limits, tests
 ```
 
 ## License
