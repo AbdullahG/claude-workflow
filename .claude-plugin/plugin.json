@@ -1,7 +1,7 @@
 {
   "name": "pm-workflow",
-  "description": "Abdullah Gursu's Claude Code skills. Includes feature-plan: a founder-PM that challenges, then plans features for existing products.",
-  "version": "1.0.0",
+  "description": "Abdullah Gursu's Claude Code skills. feature-plan: a founder-PM that challenges, then plans features for existing products. feature-build: a staff engineer that implements the plan test-first and does not stop until every suite is green.",
+  "version": "1.1.0",
   "author": {
     "name": "Abdullah Gursu",
     "url": "https://github.com/AbdullahG"
@@ -13,6 +13,8 @@
     "planning",
     "product-management",
     "feature-plan",
+    "feature-build",
+    "testing",
     "skills"
   ]
 }

@@ -1,6 +1,6 @@
 # claude-workflow
 
-Claude Code skills I use in my day-to-day product and engineering work.
+Claude Code skills I use in my day-to-day product and engineering work. `feature-plan` decides what to build and writes the plan; `feature-build` turns that plan into a tested implementation.
 
 ## Skills
 
@@ -19,6 +19,25 @@ It plans only and never writes code. It replies in whatever language you write i
 /pm-workflow:feature-plan add a referral program that gives both sides a free month
 ```
 
+### `feature-build`
+
+The other half of `feature-plan`: a veteran staff engineer and test architect that turns a plan into a working, tested implementation. It exists for one failure: code that compiles, has a few unit tests, and breaks in the first five minutes of manual testing. Give it a plan (from `feature-plan`, or a fix plan) and it will:
+
+1. **Know the ground**: read the plan, check how far the code has drifted since it was written, and inventory every repo's test setup (commands, environments, fakes, CI). It saves the setup to `docs/testing.md` so later runs skip this step.
+2. **Review the plan as an engineer**: challenge maintainability and scalability (10x data, concurrency, offline, migrations, rollback), find gaps and untestable criteria, and ask every open question before writing code.
+3. **Write the test strategy first**: turn every acceptance criterion, flow step and state (empty, error, offline, undo, retry) into unit, integration and functional/E2E tests in a traceability matrix (`docs/plans/<slug>.tests.md`). Every user flow gets at least one end-to-end test of its happy path.
+4. **Build in slices** inside a git worktree: tests first, see them fail for the right reason, implement, see them pass, one commit per slice. In multi-repo features the backend goes first.
+5. **Loop until green**: run every suite in every affected repo locally, CI or not, and fix root causes until all pass. It stops and asks if the same failure survives three attempts.
+6. **Prove the tests bite**: deliberately break the core rules (light mutation testing) and confirm a test catches each one.
+7. **Use the app like a manual tester**: launch it, walk the flows, screenshot key states, and turn any bug it finds into a test before fixing it.
+8. **Get an independent review** from a fresh subagent, then **report with evidence**: commands, test counts, the matrix, and what could not be verified.
+
+Hard rules: it never loosens, skips or deletes a test to get green, never uses `sleep` to synchronize, never tests against production, always fakes paid third-party services, and never pushes or merges. It replies in whatever language you write in.
+
+```
+/pm-workflow:feature-build docs/plans/referral-program.md
+```
+
 ## Install
 
 ### Option 1: Claude Code plugin (recommended)
@@ -30,17 +49,17 @@ Inside Claude Code:
 /plugin install pm-workflow@abdullahg
 ```
 
-Restart Claude Code if the skill doesn't appear. Update later with `/plugin marketplace update abdullahg`.
+Restart Claude Code if the skills don't appear. Update later with `/plugin marketplace update abdullahg`.
 
-### Option 2: Copy the skill manually
+### Option 2: Copy the skills manually
 
 ```bash
 git clone https://github.com/AbdullahG/claude-workflow.git
 mkdir -p ~/.claude/skills
-cp -r claude-workflow/skills/feature-plan ~/.claude/skills/
+cp -r claude-workflow/skills/feature-plan claude-workflow/skills/feature-build ~/.claude/skills/
 ```
 
-Then use it as `/feature-plan <your feature>`. To scope it to a single project, copy it into that project's `.claude/skills/` instead.
+Then use them as `/feature-plan <your feature>` and `/feature-build <plan path>`. To scope them to a single project, copy them into that project's `.claude/skills/` instead.
 
 ## Repository layout
 
@@ -50,7 +69,11 @@ Then use it as `/feature-plan <your feature>`. To scope it to a single project, 
   plugin.json        # plugin manifest
 skills/
   feature-plan/
-    SKILL.md         # the skill itself
+    SKILL.md         # plan a feature
+  feature-build/
+    SKILL.md         # implement a plan with tests
+    references/
+      testing-playbook.md  # test patterns the skill reads in its test phase
 ```
 
 ## License

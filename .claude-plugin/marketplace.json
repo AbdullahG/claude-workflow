@@ -8,7 +8,7 @@
     {
       "name": "pm-workflow",
       "source": "./",
-      "description": "Claude Code skills by Abdullah Gursu. Includes feature-plan: challenge, then plan a feature for an existing product."
+      "description": "Claude Code skills by Abdullah Gursu. feature-plan challenges, then plans a feature for an existing product; feature-build turns the plan into a tested implementation."
     }
   ],
   "description": "Abdullah Gursu's Claude Code skills for product and engineering work."
