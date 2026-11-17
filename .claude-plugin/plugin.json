@@ -1,7 +1,7 @@
 {
   "name": "product",
-  "description": "Abdullah Gursu's Claude Code skills. feature-plan: a founder-PM that challenges, then plans features for existing products. feature-build: a staff engineer that implements the plan test-first and does not stop until every suite is green.",
-  "version": "2.0.0",
+  "description": "Abdullah Gursu's Claude Code skills. feature-plan: a founder-PM that challenges, then plans features for existing products. feature-build: a staff engineer that implements the plan test-first and does not stop until every suite is green. inbtw: a by-the-way question with full research tools that changes nothing.",
+  "version": "2.1.0",
   "author": {
     "name": "Abdullah Gursu",
     "url": "https://github.com/AbdullahG"
@@ -15,6 +15,9 @@
     "feature-plan",
     "feature-build",
     "testing",
-    "skills"
+    "skills",
+    "inbtw",
+    "discussion",
+    "read-only"
   ]
 }
